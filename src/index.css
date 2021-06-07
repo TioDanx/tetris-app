@@ -1,3 +1,10 @@
 body{
   margin: 0;
+  font-family: Pixel;
+}
+
+
+@font-face {
+  font-family: Pixel;
+  src: url(./assets/Pixel-LCD-7.woff);
 }
