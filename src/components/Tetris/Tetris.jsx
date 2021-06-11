@@ -6,6 +6,7 @@ import StartButton from "../StartButton/StartButton";
 
 //Styled Components
 import { StyledTetris, StyledTetrisWrapper } from "./StyledTetris";
+import {StyledButton} from "./StyledButton"
 
 //Custom Hooks
 import { usePlayer } from "../../hooks/usePlayer";
@@ -17,6 +18,7 @@ import { useGameStatus } from "../../hooks/useGameStatus";
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
+  const [isPaused,setIsPaused] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
@@ -38,6 +40,11 @@ const Tetris = () => {
     setLevel(0);
     setRows(0);
   };
+
+  const pauseGame = () => {
+    isPaused ? setDropTime(1000) : setDropTime(null);
+    setIsPaused(!isPaused);
+  }
 
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
@@ -102,6 +109,7 @@ const Tetris = () => {
                 <Display text={`Score: ${score}`} />
                 <Display text={`Level: ${level}`} />
                 <Display text={`Rows: ${rows}`} />
+                <Display><StyledButton onClick={() => pauseGame()}>{isPaused ? "Resumir juego" : "Pausar juego"}</StyledButton></Display>
               </div>
             )}
             <StartButton callback={startGame} />
