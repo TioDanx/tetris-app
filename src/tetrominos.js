@@ -1,3 +1,4 @@
+import {useState} from 'react'
 export const TETROMINOS = {
   0: { shape: [[0]], color: "0, 0, 0" },
   I: {
@@ -58,9 +59,13 @@ export const TETROMINOS = {
   },
 };
 
-export const randomTetromino = () => {
+export const randomTetromino = (lastTetromino) => {
   const tetrominos = "IJLOSTZ";
-  const randTetromino =
-    tetrominos[Math.floor(Math.random() * tetrominos.length)];
+  let randTetromino = tetrominos[Math.floor(Math.random() * tetrominos.length)];
+  
+  console.log("tetromino que recibo: ",lastTetromino)
+  while (TETROMINOS[randTetromino].shape === lastTetromino){
+    randTetromino = tetrominos[Math.floor(Math.random() * tetrominos.length)];
+  }
   return TETROMINOS[randTetromino];
 };

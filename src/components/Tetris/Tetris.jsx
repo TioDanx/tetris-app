@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //Components
 import Stage from "../Stage/Stage";
 import Display from "../Display/Display";
@@ -19,6 +19,7 @@ const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [t, setT] = useState();
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
@@ -30,6 +31,7 @@ const Tetris = () => {
       updatePlayerPos({ x: dir, y: 0 });
     }
   };
+
   const startGame = () => {
     //Reset Everything
     setStage(createStage());
@@ -53,10 +55,12 @@ const Tetris = () => {
       }
     }
   };
+
   const dropPlayer = () => {
     setDropTime(null);
     drop();
   };
+
   const drop = () => {
     if (rows > (level + 1) * 10) {
       setLevel((prev) => prev + 1);
@@ -65,6 +69,7 @@ const Tetris = () => {
 
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
       updatePlayerPos({ x: 0, y: 1, collided: false });
+      console.log("bajando");
     } else if (player.pos.y < 1) {
       console.log("Game Over");
       setGameOver(true);
@@ -76,7 +81,7 @@ const Tetris = () => {
 
   const move = ({ keyCode }) => {
     if (!gameOver) {
-      setIsPaused(false)
+      setIsPaused(false);
       if (keyCode === 37) {
         movePlayer(-1);
       } else if (keyCode === 39) {
@@ -85,6 +90,8 @@ const Tetris = () => {
         dropPlayer();
       } else if (keyCode === 38) {
         playerRotate(stage, 1);
+      } else if (keyCode === 27) {
+        pauseGame();
       }
     }
   };
@@ -92,6 +99,10 @@ const Tetris = () => {
   useInterval(() => {
     drop();
   }, dropTime);
+
+  const isMobile = () => {
+    return window.screen.width < 1000;
+  };
 
   return (
     <StyledTetrisWrapper
@@ -121,6 +132,26 @@ const Tetris = () => {
           </aside>
         </Stage>
       </StyledTetris>
+      {isMobile() ? (
+        <div className="btns">
+          <button className="btn " onClick={() => playerRotate(stage, 1)}>
+            Rotar
+          </button>
+          <div className="btn-down">
+            <button className="btn " onClick={() => movePlayer(-1)}>
+              {"<"}
+            </button>
+            <button className="btn " onMouseDown={() => drop()}>
+              Abajo
+            </button>
+            <button className="btn " onClick={() => movePlayer(1)}>
+              {">"}
+            </button>
+          </div>
+        </div>
+      ) : (
+        " "
+      )}
     </StyledTetrisWrapper>
   );
 };
