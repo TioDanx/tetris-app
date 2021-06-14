@@ -19,7 +19,6 @@ const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [t, setT] = useState();
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
@@ -57,7 +56,6 @@ const Tetris = () => {
   };
 
   const dropPlayer = () => {
-    setDropTime(null);
     drop();
   };
 
@@ -92,6 +90,8 @@ const Tetris = () => {
         playerRotate(stage, 1);
       } else if (keyCode === 27) {
         pauseGame();
+      }else if(keyCode === 82){
+        startGame();
       }
     }
   };
@@ -109,7 +109,6 @@ const Tetris = () => {
       role="button"
       tabIndex="0"
       onKeyDown={(e) => move(e)}
-      onKeyUp={keyUp}
     >
       <StyledTetris>
         <Stage {...{ stage }}>
