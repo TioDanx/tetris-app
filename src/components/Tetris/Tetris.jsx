@@ -133,22 +133,23 @@ const Tetris = () => {
         </Stage>
       </StyledTetris>
       {isMobile() ? (
-        <div className="btns">
-          <button className="btn " onClick={() => playerRotate(stage, 1)}>
-            Rotar
-          </button>
-          <div className="btn-down">
-            <button className="btn " onClick={() => movePlayer(-1)}>
-              {"<"}
+        <>
+          {" "}
+          <div className="btns">
+            <button className="btn" onClick={() => playerRotate(stage, 1)}>
+              Rotate
             </button>
-            <button className="btn " onMouseDown={() => drop()}>
-              Abajo
-            </button>
-            <button className="btn " onClick={() => movePlayer(1)}>
-              {">"}
+            <button className="btn" onMouseDown={() => drop()}>
+              Drop
             </button>
           </div>
-        </div>
+          <button className="btn btn-left" onClick={() => movePlayer(-1)}>
+            {"<"}
+          </button>
+          <button className="btn btn-right" onClick={() => movePlayer(1)}>
+            {">"}
+          </button>
+        </>
       ) : (
         " "
       )}
