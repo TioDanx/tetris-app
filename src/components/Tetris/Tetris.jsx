@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Stage from "../Stage/Stage";
 import Display from "../Display/Display";
 import StartButton from "../StartButton/StartButton";
+import HighScores from "../HighScores/HighScores";
 
 //Styled Components
 import { StyledTetris, StyledTetrisWrapper } from "./StyledTetris";
@@ -90,7 +91,7 @@ const Tetris = () => {
         playerRotate(stage, 1);
       } else if (keyCode === 27) {
         pauseGame();
-      }else if(keyCode === 82){
+      } else if (keyCode === 82) {
         startGame();
       }
     }
@@ -105,16 +106,15 @@ const Tetris = () => {
   };
 
   return (
-    <StyledTetrisWrapper
-      role="button"
-      tabIndex="0"
-      onKeyDown={(e) => move(e)}
-    >
+    <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={(e) => move(e)}>
       <StyledTetris>
         <Stage {...{ stage }}>
           <aside>
             {gameOver ? (
-              <Display gameOver={gameOver} text="Game Over" />
+              <>
+                <Display gameOver={gameOver} text="Game Over" />
+                <Display text={`Score: ${score}`} />
+              </>
             ) : (
               <div>
                 <Display text={`Score: ${score}`} />
@@ -130,6 +130,7 @@ const Tetris = () => {
             <StartButton callback={startGame} />
           </aside>
         </Stage>
+      <HighScores {...{ score }} {...{ gameOver }} />
       </StyledTetris>
       {isMobile() ? (
         <>

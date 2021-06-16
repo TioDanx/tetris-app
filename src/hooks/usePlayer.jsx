@@ -9,9 +9,6 @@ export const usePlayer = () => {
     collided: false,
   });
 
-  useEffect(() => {
-    console.log("el tetromino actual es: ", player.tetromino);
-  }, [player.tetromino]);
   const rotate = (matrix, dir) => {
     const rotatedTetromino = matrix.map((_, index) => {
       return matrix.map((col) => col[index]);
@@ -51,11 +48,13 @@ export const usePlayer = () => {
   };
 
   const resetPlayer = useCallback(() => {
+    let aux = player.tetromino;
+    console.log("Tetromino Actual: ", aux)
     setPlayer({
       pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
-      tetromino: randomTetromino(player.tetromino).shape,
+      tetromino: randomTetromino(aux).shape,
       collided: false,
     });
-  }, []);
+  }, [player.tetromino]);
   return [player, updatePlayerPos, resetPlayer, playerRotate];
 };
