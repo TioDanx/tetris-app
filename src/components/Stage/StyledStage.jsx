@@ -7,6 +7,7 @@ export const StyledStage = styled.div`
   border: 2px solid #333;
   width: 100%;
   background: #111;
+  max-height: 100vh;
   @media only screen and (min-width: 800px) {
     grid-template-rows: repeat(
       ${(props) => props.height},

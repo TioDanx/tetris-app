@@ -5,7 +5,7 @@ export const StyledDisplay = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px 5px 10px 5px;
+    margin: 10px 5px 10px 0px;
     padding: 20px 2px;
     border: 4px solid #333;
     min-height: 50px;

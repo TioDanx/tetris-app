@@ -1,15 +1,15 @@
-body{
+body {
   margin: 0;
   font-family: Pixel;
+  background-image: url("./assets/bg.gif") !important;
 }
-
 
 @font-face {
   font-family: Pixel;
   src: url(./assets/Pixel-LCD-7.woff);
 }
 
-.btns{
+.btns {
   width: 100vw;
   position: fixed;
   bottom: 0;
@@ -18,7 +18,7 @@ body{
   align-items: flex-end;
   justify-content: center;
 }
-.btn{
+.btn {
   background-color: #f3c583;
   border: none;
   width: 60px;
@@ -30,11 +30,11 @@ body{
   margin-left: 10px;
 }
 
-.btn:active{
+.btn:active {
   opacity: 0.8;
 }
 
-.btn-right{
+.btn-right {
   position: fixed;
   font-size: 30px;
   right: 0;
@@ -42,7 +42,7 @@ body{
   transform: translate(-50%);
 }
 
-.btn-left{
+.btn-left {
   position: fixed;
   font-size: 30px;
   left: 60px;
@@ -50,14 +50,14 @@ body{
   transform: translate(-50%);
 }
 
-.high-scores-container{
+.high-scores-container {
   display: flex;
   flex-direction: column;
   height: 800px;
   justify-content: center;
 }
 
-.table{
+.table {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -73,14 +73,14 @@ body{
   margin-bottom: 10px;
 }
 
-.table-title{
+.table-title {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
 }
 
-.user-info{
+.user-info {
   background-color: #000;
   border: 4px solid #333;
   border-radius: 10px;
@@ -91,19 +91,8 @@ body{
   align-items: center;
   height: 200px;
 }
-.user-info > *{
+.user-info > * {
   width: 70%;
-  text-align: center;
-}
-
-.user-info input{
-  height: 30px;
-  background-color: black;
-  color: grey;
-  border: 4px solid #333;
-  border-radius: 10px;
-  outline: none;
-  font-family: inherit;
   text-align: center;
 }
 
@@ -116,15 +105,97 @@ body{
   font-family: inherit;
   cursor: pointer;
 }
+.user-info input {
+  height: 30px;
+  background-color: black;
+  color: grey;
+  border: 4px solid #333;
+  border-radius: 10px;
+  outline: none;
+  font-family: inherit;
+  text-align: center;
+}
+
+.audio-box-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.audio-box-container button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-color: black;
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.audio-box-container button img {
+  width: 100%;
+  height: 100%;
+  filter: invert();
+}
+
+.audio-box-container input {
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  width: 70%; /* Full-width */
+  height: 36px; /* Specified height */
+  background: #ffffff; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+  border-radius: 20px;
+  border: 2px solid black;
+}
+
+  .audio-box-container input::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 20px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  background: #000000; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 5px;
+}
+
+.home-container{
+  width: 100%;
+  height: 100vh;
+}
+
+.home{
+  height: 50vh;
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.home img{
+  width: 300px;
+
+}
+
+
+.home h1 {
+  font-size: 20px;
+}
+.home button
 
 ::-webkit-scrollbar-thumb {
   background: rgb(255, 255, 255);
   border-radius: 4px;
 }
 ::-webkit-scrollbar {
-  width: 8px; 
-  height: 8px;   
-  background:#8f57fd;
+  width: 20px;
+  height: 40px;
+  background: #8f57fd;
   border-radius: 4px;
 }
 ::-webkit-scrollbar:hover {

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+
 //Components
 import Stage from "../Stage/Stage";
 import Display from "../Display/Display";
 import StartButton from "../StartButton/StartButton";
 import HighScores from "../HighScores/HighScores";
+import AudioBox from "../AudioBox/AudioBox";
 
 //Styled Components
 import { StyledTetris, StyledTetrisWrapper } from "./StyledTetris";
@@ -68,7 +70,6 @@ const Tetris = () => {
 
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
       updatePlayerPos({ x: 0, y: 1, collided: false });
-      console.log("bajando");
     } else if (player.pos.y < 1) {
       console.log("Game Over");
       setGameOver(true);
@@ -81,17 +82,17 @@ const Tetris = () => {
   const move = ({ keyCode }) => {
     if (!gameOver) {
       setIsPaused(false);
-      if (keyCode === 37) {
+      if (keyCode === 65 || keyCode === 37) {
         movePlayer(-1);
-      } else if (keyCode === 39) {
+      } else if (keyCode === 68 || keyCode === 39) {
         movePlayer(1);
-      } else if (keyCode === 40) {
+      } else if (keyCode === 83 || keyCode === 40) {
         dropPlayer();
-      } else if (keyCode === 38) {
+      } else if (keyCode === 87 || keyCode === 38) {
         playerRotate(stage, 1);
       } else if (keyCode === 27) {
         pauseGame();
-      } else if (keyCode === 82) {
+      } else if (keyCode === 82 || keyCode === 13) {
         startGame();
       }
     }
@@ -114,6 +115,7 @@ const Tetris = () => {
               <>
                 <Display gameOver={gameOver} text="Game Over" />
                 <Display text={`Score: ${score}`} />
+                <AudioBox />
               </>
             ) : (
               <div>
@@ -128,9 +130,10 @@ const Tetris = () => {
               </div>
             )}
             <StartButton callback={startGame} />
+            <AudioBox />
           </aside>
         </Stage>
-      <HighScores {...{ score }} {...{ gameOver }} />
+        <HighScores {...{ score }} {...{ gameOver }} />
       </StyledTetris>
       {isMobile() ? (
         <>

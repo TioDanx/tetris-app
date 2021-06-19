@@ -1,10 +1,12 @@
 import { getFirestore } from "../../firebase";
 import React, { useEffect, useState } from "react";
+import spinner from "../../assets/spinner.gif"
 
 const HighScores = ({ score, gameOver }) => {
   const [highScores, setHighScores] = useState([]);
   const [name, setName] = useState()
   const [disabled, setDisabled] = useState(false)
+  const [loading, setLoading] = useState(false)
   const db = getFirestore();
   const scores = db.collection("scores");
 
@@ -14,6 +16,7 @@ const HighScores = ({ score, gameOver }) => {
     scoresFiltered.get().then((querySnapshot) => {
       querySnapshot.docs.map((doc) => aux.push({ ...doc.data() }));
       setHighScores(aux);
+      setLoading(false)
     });
   }
 
@@ -39,15 +42,18 @@ const HighScores = ({ score, gameOver }) => {
   }
 
   useEffect(() => {
+    setLoading(true)
     getHighScores()
   }, []);
 
   return (
     <div className="high-scores-container">
+      
       <div className="table">
+      {loading ? <img src={spinner} width="60" alt="Cargando.."/> :
         <div className="table-title">
           <p>TOP 5</p>
-        </div>
+        </div>}
         {highScores.map((score, i) => {
           return (
             <div key={i} className="table-title">
